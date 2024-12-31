@@ -7,10 +7,7 @@ function getComputerChoice () {
 
      // Assign random values to separate variables
     const choice = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
-     // Debugging log for random number check
-    console.log(choice);
-
-
+     
     let result;
         if (choice === 1) {
         result = 'rock'
@@ -48,25 +45,37 @@ function playRound (humanChoice, computerChoice) {
     if (humanChoice === 'rock' && computerChoice === 'scissors' || 
         humanChoice === 'scissors' && computerChoice === 'paper' || 
         humanChoice === 'paper' && computerChoice === 'rock') {
-        humanScore = humanScore + 1;
+        humanScore++;
         console.log('You lose CPU, have a good day!');
     } else if (humanChoice === 'rock' && computerChoice === 'paper' ||
         humanChoice === 'paper' && computerChoice === 'scissors' ||
         humanChoice === 'scissors' && computerChoice === 'rock') {
-        computerScore = computerScore + 1;
+        computerScore++;
         console.log('You lose human, have a nice day!');
-    } else if (humanChoice === 'rock' && computerChoice === 'rock' ||
-        humanChoice === 'paper' && computerChoice === 'paper' ||
-        humanChoice === 'scissors' && computerChoice === 'scissors') {
+    } else if (humanChoice === computerChoice) {
         console.log('Tie! Play again!')
+    } else {
+        console.log('Invalid input, no score rewarded')
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame () {
+    for (let i = 1; i <= 5; i++) {
+        console.log(`Round ${i}`);
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+        console.log(`Current Scores - Human: ${humanScore}, CPU: ${computerScore}`);
+    }
 
+    console.log("Final Results:");
+    if (humanScore > computerScore) {
+        console.log('Human wins! Final Score: Human ${humanScore} - CPU ${computerScore}');
+    } else if (computerScore > humanScore) {
+        console.log(`CPU wins! Final Score: Human ${humanScore} - CPU ${computerScore}`);
+    } else {
+        console.log('The game is tied, play again!')
+     }
+}
 
-playRound(humanSelection, computerSelection);
-console.log(humanScore, computerScore)
-
-
+playGame();

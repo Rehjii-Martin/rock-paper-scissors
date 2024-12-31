@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice () {
     const minRange = 1; // min value option
     const maxRange = 3; // max value option
@@ -40,5 +43,30 @@ function getHumanChoice () {
     return result;
 }
 
-console.log(getHumanChoice());
-console.log(getComputerChoice());
+function playRound (humanChoice, computerChoice) {
+
+    if (humanChoice === 'rock' && computerChoice === 'scissors' || 
+        humanChoice === 'scissors' && computerChoice === 'paper' || 
+        humanChoice === 'paper' && computerChoice === 'rock') {
+        humanScore = humanScore + 1;
+        console.log('You lose CPU, have a good day!');
+    } else if (humanChoice === 'rock' && computerChoice === 'paper' ||
+        humanChoice === 'paper' && computerChoice === 'scissors' ||
+        humanChoice === 'scissors' && computerChoice === 'rock') {
+        computerScore = computerScore + 1;
+        console.log('You lose human, have a nice day!');
+    } else if (humanChoice === 'rock' && computerChoice === 'rock' ||
+        humanChoice === 'paper' && computerChoice === 'paper' ||
+        humanChoice === 'scissors' && computerChoice === 'scissors') {
+        console.log('Tie! Play again!')
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+
+playRound(humanSelection, computerSelection);
+console.log(humanScore, computerScore)
+
+
